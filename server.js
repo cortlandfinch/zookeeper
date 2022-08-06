@@ -46,15 +46,32 @@ function filterByQuery(query, animalsArray) {
     return filteredResults;
 }
 
+//function takes id and array of animals and returns a single animal object
+function findById(id, animalsArray) {
+    const result = animalsArray.filter(animal => animal.id === id)[0];
+    return result;
+}
+
 // get method requires two arguments (describes route client will fetch from, callback function that executes with GET request)
 app.get('/api/animals', (req, res) => {
     // send() method to send the string Hello! to client
     // use json to send lots of JSON, send is for short messages
     let results = animals;
+    // req.query is multifaceted combining multiple parameters
+    // req.param is specific to a single property for a single record
     if (req.query) {
         results = filterByQuery(req.query, results);
     }
     res.json(results);
+});
+
+app.get('/api/animals/:id', (req, res) => {
+    const result = findById(req.params.id, animals);
+    if (result) {
+        res.json(result);
+    } else {
+        res.send(404);
+    }
 });
 
 // chain the listen() method to server at the end of server.js code
