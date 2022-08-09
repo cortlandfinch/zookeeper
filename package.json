@@ -20,5 +20,8 @@
   "homepage": "https://github.com/cortlandfinch/zookeeper#readme",
   "dependencies": {
     "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "jest": "^28.1.3"
   }
 }
